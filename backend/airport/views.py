@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import AirportRoute
 from .form import AirportRouteForm
 
+
+
 def add_route(request):
     if request.method == "POST":  
         form = AirportRouteForm(request.POST)    #import form skeleton
@@ -10,13 +12,16 @@ def add_route(request):
             return redirect('add_route')  # redirected to again add route 
     else:
         form = AirportRouteForm()
+    route=list(AirportRoute.objects.all().order_by('airport_code'))
+    return render(request, 'routes/add_route.html', {'form': form, 'route':route})  #pass the form value add_route.html
 
-    return render(request, 'routes/add_route.html', {'form': form})  #pass the form value add_route.html
 
 
 def longest_route(request):
     route = AirportRoute.objects.order_by('-duration').first()  #sort by asc and get the first one
     return render(request, 'routes/longest.html', {'route': route}) #pass the first to longest.html
+
+
 
 def search_node(request):
     result = None
@@ -39,6 +44,8 @@ def search_node(request):
             error = "N value doesnt exist. Please enter a valid number." #to give err msg
 
     return render(request, 'routes/search.html', {'result': result,'error':error})
+
+
 
 def shortest_between(request):
     result = None

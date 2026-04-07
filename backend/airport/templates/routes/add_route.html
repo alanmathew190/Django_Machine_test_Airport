@@ -4,4 +4,13 @@
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Add</button>
+
 </form>
+
+{% if route %}
+<h2>All Routes</h2>
+ <h4> Airport_code - Position - Duration</h4>
+{% for r in route %}
+  <p>{{ r.airport_code }} - {{r.position}} - {{ r.duration }}</p>
+  {% endfor %}
+{% endif %}
