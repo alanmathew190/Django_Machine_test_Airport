@@ -3,8 +3,8 @@ from .models import AirportRoute
 from .form import AirportRouteForm
 
 def add_route(request):
-    if request.method == "POST":
-        form = AirportRouteForm(request.POST)
+    if request.method == "POST":  
+        form = AirportRouteForm(request.POST)  
         if form.is_valid():
             form.save()
             return redirect('add_route')
@@ -15,5 +15,5 @@ def add_route(request):
 
 
 def longest_route(request):
-    route = AirportRoute.objects.order_by('-duration').first()
-    return render(request, 'routes/longest.html', {'route': route})
+    route = AirportRoute.objects.order_by('-duration').first()  #sort by asc and get the first one
+    return render(request, 'routes/longest.html', {'route': route}) #pass the first to longest.html
