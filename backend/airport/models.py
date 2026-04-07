@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+class AirportRoute(models.Model):
+    airport_code = models.CharField(max_length=10)
+    position = models.IntegerField()
+    duration = models.IntegerField()
+
+    def __str__(self):
+        return self.airport_code
