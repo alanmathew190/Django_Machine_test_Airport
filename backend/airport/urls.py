@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.add_route, name='add_route'),
+    path('longest/',views.longest_route,name='longest_route')
 ]

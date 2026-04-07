@@ -12,3 +12,8 @@ def add_route(request):
         form = AirportRouteForm()
 
     return render(request, 'routes/add_route.html', {'form': form})
+
+
+def longest_route(request):
+    route = AirportRoute.objects.order_by('-duration').first()
+    return render(request, 'routes/longest.html', {'route': route})
