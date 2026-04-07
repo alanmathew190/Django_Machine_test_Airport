@@ -39,3 +39,21 @@ def search_node(request):
             error = "N value doesnt exist. Please enter a valid number." #to give err msg
 
     return render(request, 'routes/search.html', {'result': result,'error':error})
+
+def shortest_between(request):
+    result = None
+
+    if request.method == "POST":
+        start = int(request.POST.get("start"))
+        end = int(request.POST.get("end"))
+
+        # Step 1: Filter range position>=start and position<=end
+        routes = AirportRoute.objects.filter(
+            position__gte=start,
+            position__lte=end
+        )
+
+        # Step 2: Find minimum duration
+        result = routes.order_by('duration').first()
+
+    return render(request, 'routes/shortest.html', {'result': result})

@@ -1,0 +1,12 @@
+<h2>Shortest Between</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <input type="number" name="start" placeholder="Start position">
+  <input type="number" name="end" placeholder="End position">
+  <button type="submit">Find</button>
+</form>
+
+{% if result %}
+  <p>{{ result.airport_code }} - {{ result.duration }}</p>
+{% endif %}
