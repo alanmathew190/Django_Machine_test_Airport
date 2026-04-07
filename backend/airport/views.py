@@ -18,3 +18,24 @@ def longest_route(request):
     route = AirportRoute.objects.order_by('-duration').first()  #sort by asc and get the first one
     return render(request, 'routes/longest.html', {'route': route}) #pass the first to longest.html
 
+def search_node(request):
+    result = None
+    error = None
+    if request.method == "POST":
+        n = int(request.POST.get("n")) #get n from form
+        direction = request.POST.get("direction") #get the direction left or right
+
+        # Step 1: Get all routes ordered by position and store in array
+        routes = list(AirportRoute.objects.all().order_by('position'))
+
+        # Step 2: Reverse if right
+        if direction == "right":
+            routes.reverse()
+
+        # Step 3: Get nth node
+        if 0 < n <= len(routes):
+            result = routes[n - 1]
+        else:
+            error = "N value doesnt exist. Please enter a valid number." #to give err msg
+
+    return render(request, 'routes/search.html', {'result': result,'error':error})

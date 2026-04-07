@@ -1,0 +1,21 @@
+<h2>Find Nth Node</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <input type="number" name="n" placeholder="Enter N">
+
+  <select name="direction">
+    <option value="left">Left</option>
+    <option value="right">Right</option>
+  </select>
+
+  <button type="submit">Search</button>
+</form>
+
+{% if result %}
+  <p>Airport: {{ result.airport_code }}</p>
+{% endif %}
+
+{% if error %}
+  <p >{{ error }}</p>
+{% endif %}
