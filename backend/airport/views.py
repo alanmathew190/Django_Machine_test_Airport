@@ -6,7 +6,7 @@ from .form import AirportRouteForm
 
 def add_route(request):
     if request.method == "POST":  
-        form = AirportRouteForm(request.POST)    #import form skeleton
+        form = AirportRouteForm(request.POST)    #import form skeleton from form
         if form.is_valid():  #check valid
             form.save()
             return redirect('add_route')  # redirected to again add route 
@@ -18,8 +18,8 @@ def add_route(request):
 
 
 def longest_route(request):
-    route = AirportRoute.objects.order_by('-duration').first()  #sort by asc and get the first one
-    return render(request, 'routes/longest.html', {'route': route}) #pass the first to longest.html
+    route = AirportRoute.objects.order_by('-duration').first()  #sort by desc and get the first one
+    return render(request, 'routes/longest.html', {'route': route}) #pass the first to longest.html 
 
 
 
@@ -35,7 +35,8 @@ def search_node(request):
 
         # Step 2: Reverse if right
         if direction == "right":
-            routes.reverse()
+            routes.reverse()  # 1 2 3 4 5    5 4 3 2 1
+            
 
         # Step 3: Get nth node
         if 0 < n <= len(routes):

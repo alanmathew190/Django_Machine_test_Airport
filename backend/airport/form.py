@@ -5,3 +5,4 @@ class AirportRouteForm(forms.ModelForm):
     class Meta:
         model = AirportRoute
         fields = ['airport_code', 'position', 'duration']
+        

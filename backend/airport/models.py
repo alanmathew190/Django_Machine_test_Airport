@@ -7,3 +7,4 @@ class AirportRoute(models.Model):
 
     def __str__(self):
         return self.airport_code
+    
